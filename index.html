@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>贵州清凉之旅 · 7日行程(8.11晚 – 8.18)</title>
+<style>
+  :root {
+    --green-900: #0d3b2c;
+    --green-700: #146b4a;
+    --green-600: #1d7a56;
+    --green-500: #2e9468;
+    --green-100: #e7f3ec;
+    --teal-600: #127d7a;
+    --sun: #f4a63c;
+    --sun-soft: #fdeed6;
+    --coral: #e8744f;
+    --ink: #22302a;
+    --ink-soft: #5b6b63;
+    --bg: #f6f9f6;
+    --card: #ffffff;
+    --line: #e3ece6;
+    --radius: 16px;
+    --shadow: 0 8px 24px rgba(13, 59, 44, 0.08);
+    --shadow-lg: 0 16px 40px rgba(13, 59, 44, 0.14);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+
+  /* ===== Hero ===== */
+  .hero {
+    position: relative;
+    background: linear-gradient(160deg, #0b3527 0%, #0d4a34 45%, #16614a 100%);
+    color: #fff;
+    padding: 72px 0 96px;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 85% 15%, rgba(244,166,60,.16), transparent 55%),
+      radial-gradient(ellipse at 10% 85%, rgba(46,148,104,.28), transparent 50%);
+  }
+  .hero .container { position: relative; z-index: 2; }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,.14);
+    border: 1px solid rgba(255,255,255,.22);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(4px);
+  }
+
+  .hero h1 {
+    font-size: clamp(30px, 5vw, 46px);
+    font-weight: 800;
+    letter-spacing: 1px;
+    line-height: 1.25;
+  }
+  .hero h1 .accent { color: #ffd98a; }
+
+  .hero .sub {
+    margin-top: 14px;
+    font-size: 16px;
+    color: rgba(255,255,255,.82);
+  }
+
+  .hero .dates {
+    margin-top: 26px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .hero .dates span {
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-size: 14px;
+  }
+
+  .mountains {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    line-height: 0;
+    pointer-events: none;
+  }
+  .mountains svg { width: 100%; height: auto; display: block; }
+
+  /* ===== Nav ===== */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255,255,255,.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav .container {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    overflow-x: auto;
+    padding: 0 16px;
+    scrollbar-width: none;
+  }
+  .nav .container::-webkit-scrollbar { display: none; }
+  .nav a {
+    flex: 0 0 auto;
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: 14px;
+    padding: 14px 14px;
+    border-bottom: 2px solid transparent;
+    transition: color .2s, border-color .2s;
+  }
+  .nav a:hover { color: var(--green-700); }
+  .nav a.active { color: var(--green-700); border-bottom-color: var(--green-600); font-weight: 600; }
+
+  /* ===== Sections ===== */
+  section { padding: 52px 0 8px; }
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .section-title .bar {
+    width: 6px; height: 26px;
+    border-radius: 4px;
+    background: linear-gradient(var(--green-500), var(--teal-600));
+  }
+  .section-title h2 { font-size: 24px; font-weight: 800; letter-spacing: 1px; }
+  .section-title .en {
+    color: var(--ink-soft);
+    font-size: 13px;
+    font-weight: 400;
+    margin-top: 2px;
+    letter-spacing: 2px;
+    opacity: .7;
+  }
+
+  /* ===== Route overview (flex) ===== */
+  .route {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: center;
+    gap: 8px;
+  }
+  .route .stop {
+    flex: 1 1 128px;
+    max-width: 150px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 12px 8px;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .route .stop .dot {
+    width: 34px; height: 34px;
+    margin: 0 auto 6px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--green-100);
+    color: var(--green-700);
+    font-weight: 700;
+    font-size: 15px;
+  }
+  .route .stop.start .dot { background: var(--sun-soft); color: #a86a10; }
+  .route .stop .name { font-size: 13px; font-weight: 600; }
+  .route .stop .info { font-size: 11px; color: var(--ink-soft); margin-top: 2px; }
+  .route .arrow {
+    align-self: center;
+    text-align: center;
+    color: var(--green-500);
+    font-size: 15px;
+    font-weight: 700;
+    padding: 0 2px;
+  }
+  .route-note {
+    margin-top: 16px;
+    text-align: center;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    background: var(--sun-soft);
+    border: 1px dashed #eec889;
+    border-radius: 10px;
+    padding: 10px 14px;
+  }
+  .route-note b { color: #8a5a10; }
+
+  /* ===== Overview table ===== */
+  .overview-table {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .overview-table .row {
+    display: grid;
+    grid-template-columns: 130px 1fr 1fr;
+    border-bottom: 1px solid var(--line);
+  }
+  .overview-table .row:last-child { border-bottom: none; }
+  .overview-table .head {
+    background: var(--green-100);
+    color: var(--green-900);
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .overview-table .cell { padding: 14px 16px; font-size: 14px; }
+  .overview-table .cell b { color: var(--green-700); }
+  .overview-table .day { font-weight: 700; color: var(--green-700); }
+
+  /* ===== Timeline ===== */
+  .timeline { position: relative; padding-left: 30px; }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 9px; top: 8px; bottom: 8px;
+    width: 2px;
+    background: linear-gradient(var(--green-500), var(--teal-600));
+    border-radius: 2px;
+  }
+
+  .day-card {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px 22px;
+    margin-bottom: 22px;
+    transition: transform .18s, box-shadow .18s;
+  }
+  .day-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+
+  .day-card::before {
+    content: "";
+    position: absolute;
+    left: -30px; top: 26px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 3px solid var(--green-500);
+    box-shadow: 0 0 0 4px var(--green-100);
+  }
+  .day-card.highlight::before { border-color: var(--sun); box-shadow: 0 0 0 4px var(--sun-soft); }
+
+  .day-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .day-head .num {
+    background: var(--green-700);
+    color: #fff;
+    font-weight: 700;
+    border-radius: 8px;
+    padding: 3px 12px;
+    font-size: 14px;
+  }
+  .day-card.highlight .day-head .num { background: var(--sun); color: #5c3a06; }
+  .day-head .title { font-size: 17px; font-weight: 800; }
+  .day-head .date { font-size: 13px; color: var(--ink-soft); background: var(--bg); padding: 2px 10px; border-radius: 999px; }
+
+  .day-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .day-tags span {
+    font-size: 12px;
+    background: var(--green-100);
+    color: var(--green-700);
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-weight: 500;
+  }
+  .day-card.highlight .day-tags span { background: var(--sun-soft); color: #8a5a10; }
+
+  .plan { list-style: none; }
+  .plan li {
+    position: relative;
+    padding: 6px 0 6px 28px;
+    font-size: 14.5px;
+    color: var(--ink);
+  }
+  .plan li::before {
+    content: "";
+    position: absolute;
+    left: 4px; top: 15px;
+    width: 8px; height: 8px;
+    border-radius: 2px;
+    background: var(--green-300, #a9d7bd);
+    transform: rotate(45deg);
+  }
+  .plan li .t { color: var(--green-700); font-weight: 700; }
+  .plan li .tag {
+    display: inline-block;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 0 8px;
+    margin-right: 6px;
+    font-size: 12px;
+    color: var(--ink-soft);
+    min-width: 30px;
+    text-align: center;
+  }
+
+  .tip-box {
+    margin-top: 12px;
+    background: var(--sun-soft);
+    border-left: 4px solid var(--sun);
+    border-radius: 0 10px 10px 0;
+    padding: 10px 14px;
+    font-size: 13.5px;
+    color: #6b4a12;
+  }
+  .tip-box b { color: #8a5a10; }
+  .stay-box {
+    margin-top: 12px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    background: var(--green-100);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13.5px;
+    color: var(--green-900);
+  }
+  .stay-box b { color: var(--green-700); }
+
+  /* ===== 3-col cards ===== */
+  .cards-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .mini-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 18px;
+  }
+  .mini-card .ic { font-size: 26px; margin-bottom: 8px; }
+  .mini-card h3 { font-size: 15.5px; margin-bottom: 8px; color: var(--green-900); }
+  .mini-card ul { list-style: none; }
+  .mini-card ul li {
+    font-size: 13.5px;
+    padding: 4px 0;
+    color: var(--ink-soft);
+    border-bottom: 1px dashed var(--line);
+  }
+  .mini-card ul li:last-child { border-bottom: none; }
+  .mini-card ul li b { color: var(--ink); }
+
+  /* ===== Two-col info ===== */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .panel {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px;
+  }
+  .panel h3 {
+    font-size: 15.5px;
+    margin-bottom: 12px;
+    color: var(--green-900);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .panel p, .panel li { font-size: 14px; color: var(--ink-soft); }
+  .panel ul { list-style: none; padding-left: 0; }
+  .panel ul li { padding: 5px 0 5px 22px; position: relative; }
+  .panel ul li::before {
+    content: "✔";
+    position: absolute;
+    left: 0;
+    color: var(--green-500);
+    font-size: 13px;
+  }
+  .panel .route-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 6px;
+    padding: 1px 8px;
+    margin-right: 4px;
+  }
+  .route-tag.north { background: var(--green-100); color: var(--green-700); }
+  .route-tag.south { background: var(--sun-soft); color: #8a5a10; }
+
+  /* ===== Distance table ===== */
+  .dist-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .dist-table th {
+    background: var(--green-100);
+    color: var(--green-900);
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 700;
+  }
+  .dist-table td { padding: 10px 12px; border-bottom: 1px solid var(--line); }
+  .dist-table tr:last-child td { border-bottom: none; }
+  .dist-table td:last-child { color: var(--ink-soft); }
+
+  /* ===== Footer ===== */
+  footer {
+    margin-top: 60px;
+    background: var(--green-900);
+    color: rgba(255,255,255,.75);
+    padding: 40px 0;
+    font-size: 13px;
+    text-align: center;
+  }
+  footer .note {
+    max-width: 640px;
+    margin: 0 auto;
+    color: rgba(255,255,255,.6);
+    line-height: 1.9;
+  }
+  footer b { color: #ffd98a; }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 760px) {
+    .route .arrow { display: none; }
+    .route .stop { flex: 1 1 30%; max-width: none; }
+    .overview-table .row { grid-template-columns: 110px 1fr; }
+    .overview-table .cell.hide-m { display: none; }
+    .cards-3 { grid-template-columns: 1fr; }
+    .two-col { grid-template-columns: 1fr; }
+    section { padding-top: 40px; }
+    .day-card { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-badge">🌿 山水秘境 · 中国凉都 · 暑期避暑</div>
+    <h1>贵州清凉之旅 <span class="accent">7 日行程</span></h1>
+    <p class="sub">2026.8.11(晚) — 8.18 &nbsp;|&nbsp; 贵阳 · 桃源河漂流 · 六盘水·梅花山 · 六枝 · 黄果树 · 安顺</p>
+    <div class="dates">
+      <span>🚗 全程自驾出行</span>
+      <span>🐒 黔灵山 · 甲秀楼</span>
+      <span>🌊 桃源河漂流</span>
+      <span>🕳️ 织金洞（沿途可选）</span>
+      <span>⛵ 牂牁江游船 · 龙脊山</span>
+      <span>💧 黄果树 · 安顺古镇</span>
+    </div>
+  </div>
+  <div class="mountains">
+    <svg viewBox="0 0 1440 140" preserveAspectRatio="none">
+      <path fill="#0d3b2c" d="M0,90 L160,40 L320,95 L480,30 L640,100 L800,45 L960,105 L1120,50 L1280,95 L1440,55 L1440,140 L0,140 Z" opacity="0.55"/>
+      <path fill="#0f4a33" d="M0,110 L200,60 L400,120 L600,70 L800,125 L1000,75 L1200,120 L1440,85 L1440,140 L0,140 Z" opacity="0.8"/>
+    </svg>
+  </div>
+</header>
+
+<!-- ================= NAV ================= -->
+<nav class="nav">
+  <div class="container">
+    <a href="#overview">行程总览</a>
+    <a href="#days">每日安排</a>
+    <a href="#route">路线与交通</a>
+    <a href="#food">美食推荐</a>
+    <a href="#prep">行前准备</a>
+  </div>
+</nav>
+
+<main class="container">
+
+  <!-- ================= OVERVIEW ================= -->
+  <section id="overview">
+    <div class="section-title">
+      <div class="bar"></div>
+      <div>
+        <h2>行程总览</h2>
+        <div class="en">ROUTE OVERVIEW</div>
+      </div>
+    </div>
+
+    <div class="route">
+      <div class="stop start">
+        <div class="dot">1</div>
+        <div class="name">贵阳</div>
+        <div class="info">8/11晚–8/12</div>
+      </div>
+      <div class="arrow">➜</div>
+      <div class="stop">
+        <div class="dot">2</div>
+        <div class="name">桃源河漂流</div>
+        <div class="info">8/13 上午</div>
+      </div>
+      <div class="arrow">➜</div>
+      <div class="stop">
+        <div class="dot">3</div>
+        <div class="name">六盘水·梅花山</div>
+        <div class="info">8/13晚–8/14 凉都避暑</div>
+      </div>
+      <div class="arrow">➜</div>
+      <div class="stop">
+        <div class="dot">4</div>
+        <div class="name">六枝特区</div>
+        <div class="info">8/15 牂牁江·龙脊山</div>
+      </div>
+      <div class="arrow">➜</div>
+      <div class="stop">
+        <div class="dot">5</div>
+        <div class="name">黄果树</div>
+        <div class="info">8/16 瀑布</div>
+      </div>
+      <div class="arrow">➜</div>
+      <div class="stop">
+        <div class="dot">6</div>
+        <div class="name">安顺</div>
+        <div class="info">8/16晚–8/17 龙宫 · 人文</div>
+      </div>
+      <div class="arrow">➜</div>
+      <div class="stop start">
+        <div class="dot">7</div>
+        <div class="name">贵阳</div>
+        <div class="info">8/17晚回 · 8/18返程</div>
+      </div>
+    </div>
+    <div class="route-note">
+      🛣️ <b>去程顺游：</b>北线「织金洞」（世界地质公园 · 8/13 可选）｜<b>返程主线：</b>六枝（牂牁江·龙脊山）→ 黄果树 → 安顺 → 贵阳，一路向东不回头
+    </div>
+
+    <br><br>
+    <div class="overview-table">
+      <div class="row head">
+        <div class="cell">日期</div>
+        <div class="cell">行程主题</div>
+        <div class="cell hide-m">住宿</div>
+      </div>
+      <div class="row"><div class="cell day">8/11(晚) · 周二</div><div class="cell">抵达贵阳 · 入住休整</div><div class="cell hide-m"><b>贵阳市区</b></div></div>
+      <div class="row"><div class="cell day">8/12 · 周三</div><div class="cell">黔灵山 · 甲秀楼夜景 · 小吃街</div><div class="cell hide-m"><b>贵阳市区</b></div></div>
+      <div class="row"><div class="cell day">8/13 · 周四</div><div class="cell">桃源河漂流 → 织金洞(可选) → 六盘水·梅花山</div><div class="cell hide-m"><b>梅花山附近</b></div></div>
+      <div class="row"><div class="cell day">8/14 · 周五</div><div class="cell">梅花山 · 野玉海 · 海坪彝族小镇 · 水城古镇</div><div class="cell hide-m"><b>六盘水市区</b></div></div>
+      <div class="row"><div class="cell day">8/15 · 周六</div><div class="cell">六枝一日：牂牁江 · 龙脊山 · 岩脚古镇</div><div class="cell hide-m"><b>黄果树/镇宁</b></div></div>
+      <div class="row"><div class="cell day">8/16 · 周日</div><div class="cell">黄果树瀑布 → 傍晚到安顺</div><div class="cell hide-m"><b>安顺市区</b></div></div>
+      <div class="row"><div class="cell day">8/17 · 周一</div><div class="cell">安顺一日：龙宫 · 文庙 · 虹山湖 → 回贵阳</div><div class="cell hide-m"><b>贵阳市区</b></div></div>
+      <div class="row"><div class="cell day">8/18 · 周二</div><div class="cell">贵阳返程</div><div class="cell hide-m"><b>—</b></div></div>
+    </div>
+  </section>
+
+  <!-- ================= DAYS ================= -->
+  <section id="days">
+    <div class="section-title">
+      <div class="bar"></div>
+      <div>
+        <h2>每日安排</h2>
+        <div class="en">DAY BY DAY</div>
+      </div>
+    </div>
+
+    <div class="timeline">
+
+      <!-- Day 1 -->
+      <div class="day-card">
+        <div class="day-head">
+          <span class="num">DAY 1</span>
+          <span class="title">抵达贵阳 · 入住休整</span>
+          <span class="date">8月11日(晚) · 周二</span>
+        </div>
+        <div class="day-tags"><span>✈️ 抵达</span><span>🌆 城市夜景</span></div>
+        <ul class="plan">
+          <li><span class="tag">晚间</span><span class="t">抵达贵阳</span>，从龙洞堡机场 / 贵阳北站入住市区酒店</li>
+          <li><span class="tag">住宿</span>推荐住在<b>喷水池、大十字、甲秀楼</b>一带，交通便利、夜景可步行</li>
+          <li><span class="tag">晚上</span>到得早可去<b>花果园湿地公园</b>看「白宫」夜景，或河滨公园散步</li>
+          <li><span class="tag">休息</span>早点休息，为接下来几天养足精神</li>
+        </ul>
+        <div class="tip-box"><b>💡 提示：</b>贵阳夏季约 20–30°C，多阵雨，随身带把伞。</div>
+        <div class="stay-box"><b>🏨 住：</b>贵阳市区（喷水池 / 大十字 / 甲秀楼一带）。</div>
+      </div>
+
+      <!-- Day 2 -->
+      <div class="day-card highlight">
+        <div class="day-head">
+          <span class="num">DAY 2</span>
+          <span class="title">黔灵山 · 甲秀楼夜游</span>
+          <span class="date">8月12日 · 周三</span>
+        </div>
+        <div class="day-tags"><span>🐒 黔灵山</span><span>🌆 甲秀楼</span><span>🍜 小吃街</span></div>
+        <ul class="plan">
+          <li><span class="tag">上午</span><span class="t">黔灵公园</span>——可乘缆车登顶俯瞰贵阳全城，游<b>弘福寺</b>、<b>黔灵湖</b>，路上还会遇到著名的<b>黔灵山猕猴</b></li>
+          <li><span class="tag">中午</span>午餐——花溪牛肉粉 / 酸汤鱼 / 酸汤牛肉</li>
+          <li><span class="tag">午休</span>12:30–14:30 <b>回酒店午休小憩</b>——躲开午后高温，下午更精神</li>
+          <li><span class="tag">下午</span>可选<b>贵州省博物馆</b>（免费需预约，看多彩贵州民族文化）或<b>青云市集</b>逛逛</li>
+          <li><span class="tag">傍晚</span><span class="t">甲秀楼 &amp; 翠微园</span>——贵阳地标，南明河畔灯光夜景绝佳</li>
+          <li><span class="tag">晚上</span><span class="t">青云路 / 二七路小吃街</span>——肠旺面、丝娃娃、豆腐圆子、手搓冰粉</li>
+        </ul>
+        <div class="tip-box"><b>💡 提示：</b>黔灵山猴子多，<b>不要逗喂、不要手提食物袋靠近</b>；爬山半日建议穿舒适运动鞋。今天节奏轻松，为明天漂流养足精神。</div>
+        <div class="stay-box"><b>🏨 住：</b>贵阳市区。</div>
+      </div>
+
+      <!-- Day 3 -->
+      <div class="day-card highlight">
+        <div class="day-head">
+          <span class="num">DAY 3</span>
+          <span class="title">桃源河漂流 → 织金洞(可选) → 六盘水·梅花山</span>
+          <span class="date">8月13日 · 周四</span>
+        </div>
+        <div class="day-tags"><span>🌊 漂流</span><span>🕳️ 织金洞</span><span>🚗 转场</span><span>❄️ 凉都</span></div>
+        <ul class="plan">
+          <li><span class="tag">08:30</span><span class="t">出发前往桃源河</span>——修文县桃源河景区，距贵阳市区约 1 小时车程</li>
+          <li><span class="tag">上午</span><span class="t">峡谷漂流约 3 小时</span>，被誉为「黔中第一漂」，8 月水量充足、全程清凉刺激</li>
+          <li><span class="tag">装备</span>换洗衣物、速干衣、溯溪鞋、手机防水袋；景区可寄存和更衣</li>
+          <li><span class="tag">午休</span>12:30–14:00 午餐 + <b>更衣休整小憩</b>，养足精神再赶路</li>
+          <li><span class="tag">下午</span>沿<b>都香高速（北线）</b>前往六盘水，途中顺游<b>织金洞</b>（约 2h）——世界地质公园，中国最美溶洞之一；不游则直达六盘水约 3 小时</li>
+          <li><span class="tag">晚上</span>抵达六盘水，入住<b>梅花山附近</b>，晚餐水城羊肉粉 + 六盘水烙锅</li>
+        </ul>
+        <div class="tip-box"><b>💡 提示：</b>漂流遇雷雨天气可能临时关闭，出行前看天气预报并致电景区确认；漂流后全身会湿，备好整套干衣服。<b>织金洞是弹性选项</b>——想早点到梅花山就略过，直接开去六盘水更从容。</div>
+        <div class="stay-box"><b>🏨 住：</b>六盘水·梅花山附近（已订），次日一早直接上山。</div>
+      </div>
+
+      <!-- Day 4 -->
+      <div class="day-card">
+        <div class="day-head">
+          <span class="num">DAY 4</span>
+          <span class="title">梅花山 → 韭菜坪 → 水城古镇</span>
+          <span class="date">8月14日 · 周五</span>
+        </div>
+        <div class="day-tags"><span>🚡 缆车</span><span>🌼 韭菜花海</span><span>🏘️ 古镇夜景</span></div>
+        <ul class="plan">
+          <li><span class="tag">一早</span><span class="t">梅花山索道登顶</span>——住得近先上山，高山草甸漫步、俯瞰凉都全景</li>
+          <li><span class="tag">上午</span>驱车约 1–1.5 小时前往<b>韭菜坪</b>——「阿西里西 · 云上花海」，万亩野生韭菜花铺满山顶（8 月中下旬渐入花期，月底最盛）</li>
+          <li><span class="tag">午休</span>山顶 / 回程途中午餐 + <b>小憩</b>——高原紫外线强，注意防晒</li>
+          <li><span class="tag">下午</span>返程回市区，逛<b>水城古镇</b>（荷城 · 三线建设街区）+ 明湖国家湿地公园</li>
+          <li><span class="tag">晚上</span><b>水城烙锅</b>收尾，逛逛古镇夜市</li>
+        </ul>
+        <div class="tip-box"><b>💡 提示：</b>韭菜坪有两个：<b>大韭菜坪</b>（赫章 · 云上花海，韭菜花 8 月底–9 月最盛，本安排即此处）；<b>小韭菜坪</b>（贵州最高峰，石林徒步、免费）就在钟山区大湾镇、离梅花山更近，可二选一。六盘水号称「中国凉都」，夏季白天约 22°C、早晚偏凉，备一件薄外套。<b>备选：</b>时间充裕可顺游<b>野玉海 · 海坪彝族小镇</b>（与梅花山方向相反，需评估体力）。</div>
+        <div class="stay-box"><b>🏨 住：</b>六盘水市区（水城古镇 / 明湖湿地一带）。</div>
+      </div>
+
+      <!-- Day 5 -->
+      <div class="day-card highlight">
+        <div class="day-head">
+          <span class="num">DAY 5</span>
+          <span class="title">六枝一日：牂牁江 · 龙脊山 · 岩脚古镇</span>
+          <span class="date">8月15日 · 周六</span>
+        </div>
+        <div class="day-tags"><span>⛵ 游船</span><span>⛰️ 龙脊天路</span><span>🏘️ 古镇</span></div>
+        <ul class="plan">
+          <li><span class="tag">上午</span><span class="t">牂牁江游船</span>（六枝西南，约 1.5h）——乘船游北盘江峡谷，远眺老王山</li>
+          <li><span class="tag">上午</span><span class="t">龙脊山</span>——与牂牁江同片区（牂牁镇 / 中寨乡交界），沿<b>龙脊天路</b>自驾盘山，观龙台、高山草甸与怪石，俯瞰牂牁江</li>
+          <li><span class="tag">午休</span>景区周边农家乐午餐 + <b>小憩</b>，恢复体力</li>
+          <li><span class="tag">下午</span><span class="t">岩脚古镇</span>（六枝北，约 1.5h 车程）——明清盐茶古道石板街古镇，逛银饰 / 手工面条作坊</li>
+          <li><span class="tag">傍晚</span>东行入住<b>黄果树 / 镇宁</b>（约 1.5–2h），为明早入园做准备</li>
+        </ul>
+        <div class="tip-box"><b>💡 提示：</b>龙脊山免费开放，但<b>上山路陡、部分土路</b>，雨天或低底盘车谨慎——不想徒步就沿龙脊天路开车观景即可。六枝景点分散、当天车程较多；<b>梭戛长角苗博物馆</b>时间紧可略过（开放时间有限，去前先确认）。</div>
+        <div class="stay-box"><b>🏨 住：</b>黄果树 / 镇宁一带（景区附近，次日一早入园）。</div>
+      </div>
+
+      <!-- Day 6 -->
+      <div class="day-card highlight">
+        <div class="day-head">
+          <span class="num">DAY 6</span>
+          <span class="title">黄果树瀑布一日 → 傍晚到安顺</span>
+          <span class="date">8月16日 · 周日</span>
+        </div>
+        <div class="day-tags"><span>💦 大瀑布</span><span>🌉 天星桥</span><span>🎫 需预约</span><span>🚗 到安顺</span></div>
+        <ul class="plan">
+          <li><span class="tag">一早</span>从镇宁 / 黄果树酒店出发，<b>开园即入</b>——避开人流高峰</li>
+          <li><span class="tag">上午</span>游览<b>大瀑布</b>（8 月丰水期水量最壮观，穿雨衣体验水帘洞）+ <b>陡坡塘</b></li>
+          <li><span class="tag">午休</span>12:30–14:00 景区内午餐 + <b>避暑小憩</b>，恢复体力</li>
+          <li><span class="tag">下午</span><b>天星桥</b>——耗时较长，按体力取舍</li>
+          <li><span class="tag">傍晚</span>驱车约 <b>1 小时到安顺</b>，入住安顺市区</li>
+          <li><span class="tag">晚上</span>安顺夜市——虹山湖公园 / 顾府街，来一碗<b>夺夺粉</b></li>
+        </ul>
+        <div class="tip-box"><b>💡 提示：</b>黄果树需提前在官方小程序 /「一码游贵州」预约，暑期人多务必提前。天星桥全程约 2.5–3 小时，可只走精华段。相机、手机做好防水，穿舒适防滑鞋。</div>
+        <div class="stay-box"><b>🏨 住：</b>安顺市区。</div>
+      </div>
+
+      <!-- Day 7 -->
+      <div class="day-card highlight">
+        <div class="day-head">
+          <span class="num">DAY 7</span>
+          <span class="title">安顺一日：龙宫 · 文庙 · 虹山湖 → 回贵阳</span>
+          <span class="date">8月17日 · 周一</span>
+        </div>
+        <div class="day-tags"><span>🚣 水溶洞</span><span>🏛️ 古城人文</span><span>🍜 安顺美食</span><span>🚗 回贵阳</span></div>
+        <ul class="plan">
+          <li><span class="tag">上午</span><span class="t">龙宫</span>（安顺西南，约 40 分钟车程）——乘船进<b>水溶洞</b>、观<b>龙门飞瀑</b>、旋塘，游玩约 2.5–3 小时</li>
+          <li><span class="tag">中午</span>回安顺市区午餐——<b>夺夺粉</b> / 安顺裹卷 / 小锅凉粉</li>
+          <li><span class="tag">午休</span>12:30–14:30 <b>回酒店午休</b>，避开正午高温</li>
+          <li><span class="tag">下午</span>安顺市区轻逛——<b>安顺文庙</b>（龙柱石雕）、<b>虹山湖公园</b>、<b>儒林路老街</b>，择一两个即可</li>
+          <li><span class="tag">傍晚</span>驱车约 <b>2 小时回贵阳</b>，入住机场 / 高铁站附近</li>
+          <li><span class="tag">晚上</span>早点休息，第二天从容返程</li>
+        </ul>
+        <div class="tip-box"><b>💡 提示：</b>龙宫是<b>水溶洞</b>，乘船入洞，与织金洞（旱洞）体验完全不同；需提前在官方小程序 /「一码游贵州」预约，8 月人多务必提前。龙门飞瀑水汽大，带雨具、穿防滑鞋。<b>若返程航班较晚</b>，可 8/17 住安顺、8/18 一早回贵阳（约 1.5h）。</div>
+        <div class="stay-box"><b>🏨 住：</b>贵阳市区（机场 / 高铁站附近，返程方便）。</div>
+      </div>
+
+      <!-- Day 8 departure -->
+      <div class="day-card">
+        <div class="day-head">
+          <span class="num">DAY 8</span>
+          <span class="title">贵阳返程</span>
+          <span class="date">8月18日 · 周二</span>
+        </div>
+        <div class="day-tags"><span>🛍️ 返程</span></div>
+        <ul class="plan">
+          <li><span class="tag">上午</span>依返程航班/高铁时间安排——时间充裕可在市区采购伴手礼（刺梨干/刺梨汁、本地茶叶、辣椒酱）</li>
+          <li><span class="tag">下午</span>前往<b>龙洞堡机场 / 贵阳北站</b>，结束旅程</li>
+        </ul>
+        <div class="tip-box"><b>💡 提示：</b>机场/车站建议预留 2 小时以上；8/17 晚已住在机场/车站附近的话，这天上车更从容。</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= ROUTE & TRANSPORT ================= -->
+  <section id="route">
+    <div class="section-title">
+      <div class="bar"></div>
+      <div>
+        <h2>路线与交通</h2>
+        <div class="en">TRANSPORT</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <h3>🚗 各段车程参考（自驾）</h3>
+        <table class="dist-table">
+          <tr><th>路段</th><th>参考车程</th></tr>
+          <tr><td>贵阳 → 桃源河（修文）</td><td>约 1 小时</td></tr>
+          <tr><td>桃源河 → 织金洞</td><td>约 1.5–2 小时</td></tr>
+          <tr><td>织金洞 → 六盘水</td><td>约 1.5–2 小时</td></tr>
+          <tr><td>六盘水 → 韭菜坪</td><td>约 1–1.5 小时</td></tr>
+          <tr><td>六盘水 → 牂牁江（六枝）</td><td>约 1.5 小时</td></tr>
+          <tr><td>牂牁江 → 岩脚古镇</td><td>约 1.5 小时</td></tr>
+          <tr><td>岩脚 → 黄果树/镇宁</td><td>约 1.5–2 小时</td></tr>
+          <tr><td>黄果树 → 安顺</td><td>约 1 小时</td></tr>
+          <tr><td>安顺 → 龙宫</td><td>约 40 分钟</td></tr>
+          <tr><td>龙宫 → 贵阳</td><td>约 2 小时</td></tr>
+        </table>
+      </div>
+      <div class="panel">
+        <h3>🛣️ 去程 · 返程两条主线（沿途景区）</h3>
+        <ul>
+          <li><span class="route-tag north">去程 · 北线都香高速</span>贵阳→六盘水：经织金，顺游<b>织金洞</b>（世界地质公园，游览约 2h）＋ 织金古城，8/13 可选</li>
+          <li><span class="route-tag south">返程 · 沪昆高速东行</span>六枝 → 黄果树 → 安顺 → 贵阳：<b>牂牁江 · 龙脊山</b>（六枝）、<b>黄果树瀑布</b>（8/16）、<b>龙宫</b>（水溶洞乘船 · 8/17），一路向东不回头</li>
+          <li>8/17 已安排<b>龙宫</b>；若想换口味可选<b>云峰屯堡</b>（明代军屯石城）或<b>旧州古镇</b></li>
+          <li>🚙 六枝景点分散（牂牁江·龙脊山在西南、岩脚在北），自驾按导航走最顺</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top:18px;" class="panel">
+      <h3>🧭 自驾出行贴士</h3>
+      <ul>
+        <li>已确定<b>全程自驾</b>：全程总里程约 <b>900–1000 公里</b>，大部分为高速 + 山区二级路</li>
+        <li>每天安排<b>午休</b>：8 月午后日照强，午餐后 1.5–2 小时小憩，避暑也开得更稳</li>
+        <li>龙脊山、韭菜坪<b>上山路陡、部分土路</b>，雨天或低底盘车谨慎，可只开车观景不徒步</li>
+        <li>出发前检查车况（轮胎、刹车、雨刮），提前办好 / 确认 ETC</li>
+        <li>山区加油站分布稀疏，油量过半及时补油；景区山路弯多，控制车速</li>
+        <li>8 月暑期 + 周末车流量大，建议每天<b>早出发、错峰</b>；雨天湿滑减速慢行</li>
+        <li>晕车可备晕车药，长途驾驶请轮换休息</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= FOOD ================= -->
+  <section id="food">
+    <div class="section-title">
+      <div class="bar"></div>
+      <div>
+        <h2>美食推荐</h2>
+        <div class="en">FOOD GUIDE</div>
+      </div>
+    </div>
+    <div class="cards-3">
+      <div class="mini-card">
+        <div class="ic">🥢</div>
+        <h3>贵阳</h3>
+        <ul>
+          <li><b>肠旺面</b>——贵阳早餐之魂</li>
+          <li><b>丝娃娃</b>——手工现包、酸汤蘸水</li>
+          <li><b>酸汤鱼</b>——苗侗风味必吃</li>
+          <li><b>雷家豆腐圆子</b>·<b>恋爱豆腐果</b></li>
+          <li><b>花溪牛肉粉</b>——汤头醇厚</li>
+        </ul>
+      </div>
+      <div class="mini-card">
+        <div class="ic">🍖</div>
+        <h3>六盘水 &amp; 六枝</h3>
+        <ul>
+          <li><b>水城烙锅</b>——凉都招牌，围炉烤一切</li>
+          <li><b>水城羊肉粉</b>——冬日暖胃夏日解馋</li>
+          <li><b>牂牁江鱼</b>——六枝江鲜</li>
+          <li><b>茨冲鸡火锅</b>·<b>岩脚手工面条/豆腐</b></li>
+          <li>夜市：水城古镇 / 钟山大道</li>
+        </ul>
+      </div>
+      <div class="mini-card">
+        <div class="ic">🍜</div>
+        <h3>安顺 &amp; 返程</h3>
+        <ul>
+          <li><b>夺夺粉</b>——安顺特色，必吃</li>
+          <li><b>安顺裹卷</b>·<b>小锅凉粉</b></li>
+          <li><b>屯堡菜</b>·<b>龙宫镇农家菜</b></li>
+          <li><b>安顺豆腐圆子</b>——夜市必点</li>
+          <li>伴手礼：刺梨干/刺梨汁、贵州绿茶、辣椒酱</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PREP ================= -->
+  <section id="prep">
+    <div class="section-title">
+      <div class="bar"></div>
+      <div>
+        <h2>行前准备 &amp; 温馨提示</h2>
+        <div class="en">PACKING &amp; TIPS</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <h3>🎒 物品清单</h3>
+        <ul>
+          <li><b>漂流装备</b>：换洗衣物、速干衣、溯溪鞋、手机防水袋</li>
+          <li><b>衣物</b>：夏季短袖 + 一件薄外套（凉都早晚偏凉、溶洞内也凉）</li>
+          <li><b>防晒</b>：防晒霜、帽子、墨镜</li>
+          <li><b>雨具</b>：雨伞/轻便雨衣（贵州 8 月多阵雨）</li>
+          <li><b>其他</b>：驱蚊液、晕车药、常用药品</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>📌 预订与注意事项</h3>
+        <ul>
+          <li>8 月为暑期旺季，<b>酒店、漂流、黄果树门票提前 3–7 天预订</b></li>
+          <li>黄果树、织金洞等通过官方小程序 /「一码游贵州」预约；韭菜坪、龙脊山免费</li>
+          <li>漂流受天气影响大，出发前确认景区当日是否开放</li>
+          <li>8 月午后炎热，<b>每日安排午休</b>，下午行程 14:30 后再出发更轻松</li>
+          <li>山区信号可能不稳定，提前下载离线地图</li>
+          <li>贵州菜偏辣偏酸，不吃辣记得提前跟店家说「少辣」</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="container">
+    <div style="font-size:15px; margin-bottom:8px;"><b>贵州清凉之旅 · 7 日行程</b></div>
+    <div>2026.8.11(晚) — 8.18 ｜ 贵阳 · 黔灵山 · 桃源河漂流 · 六盘水·梅花山 · 六枝 · 黄果树 · 安顺</div>
+    <br>
+    <div class="note">
+      本行程为规划参考：各景区开放时间、票价、天气与交通情况请以官方当日公告为准。<br>
+      8 月暑期客流大，酒店与门票务必提前预订。祝旅途愉快，一路清凉！🌿
+    </div>
+  </div>
+</footer>
+
+<script>
+  // 导航高亮
+  const links = document.querySelectorAll('.nav a');
+  const sections = document.querySelectorAll('main section[id]');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) cur = s.id;
+    });
+    links.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+    });
+  });
+</script>
+
+</body>
+</html>
